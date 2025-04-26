@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>🔴 Live</title>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector("#hide").addEventListener("click", () => {
+          // show and hide the description
+          const description = document.querySelector(".description");
+          if (
+            description.style.display === "" ||
+            description.style.display === "block"
+          ) {
+            description.style.display = "none";
+          } else {
+            description.style.display = "block";
+          }
+        });
+
+        // get the input url and put in the src iframe
+        document
+          .querySelector("#liveform")
+          .addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const live = document.querySelector("#live");
+
+            document.querySelector(".live").src = live.value;
+
+            live.value = "";
+          });
+
+        // get the input url and put in the src iframe
+        document
+          .querySelector("#chatform")
+          .addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const chat = document.querySelector("#chat");
+
+            document.querySelector(".chat").src =
+              `https://multichat.mnzn.dev/-/${chat.value}`;
+
+            chat.value = "";
+          });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="hidden-btn">
+      <button id="hide">Description</button>
+    </div>
+
+    <div class="description">
+      <p>youtube: https://youtube.com/embed/id</p>
+      <p>single chat: channel • multiple chats: channel/channel/...</p>
+    </div>
+
+    <div class="live-chat-forms">
+      <form id="liveform" method="post">
+        <input id="live" type="text" name="live" placeholder="Live" size="30" />
+        <button type="submit">submit</button>
+      </form>
+
+      <form id="chatform" method="post">
+        <input id="chat" type="text" name="chat" placeholder="Chat" size="30" />
+        <button type="submit">submit</button>
+      </form>
+    </div>
+
+    <div class="live-chat-iframes">
+      <iframe class="live" src="" allowfullscreen> </iframe>
+      <iframe class="chat" src=""></iframe>
+    </div>
+  </body>
+</html>
